@@ -19,4 +19,6 @@ wp search-replace 'localhost' 'atarchou@42.fr' --allow-root
 
 wp search-replace 'https://localhost' 'https://atarchou@42.fr' --allow-root
 
+sed -i 's/listen =\/run\/php\/php7.3-fpm.sock/listen = 9000/g' /etc/php7.3/fpm/pool.d/www.conf
+
 exec $@
