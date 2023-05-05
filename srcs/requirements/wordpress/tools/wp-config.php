@@ -1,4 +1,4 @@
-define ('DB_NAME', 'wordpress');
-define ('DB_USER', 'wordpress');
-define ('DB_PASSWORD', '');
-define ('DB_HOST', 'http://localhost:3306');
+define ('DB_NAME', '${MYSQL_DATABASE}');
+define ('DB_USER', '${MYSQL_USER}');
+define('DB_PASSWORD', '${MYSQL_PASSWORD}');
+define('DB_HOST', 'mariadb');
