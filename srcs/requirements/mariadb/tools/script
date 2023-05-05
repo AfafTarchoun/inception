@@ -1,5 +1,0 @@
-service mysql start
-mariadb -u root -e "CREATE DATABASE '${DB_NAME}';"
-mariadb -u root -e "CREATE USER '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}' ; FLUSH PRIVILEGES;"
-mariadb -u root -e "GRANT ALL PRIVILEGES ON wordpress.* TO '${DB_USER}' ; FLUSH PRIVILEGES;"
-exec $@
