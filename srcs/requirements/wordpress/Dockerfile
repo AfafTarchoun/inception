@@ -1,6 +1,6 @@
 FROM debian:buster
 RUN apt-get update && apt-get install -y php7.3-fpm \
-php7.3-fpm php-mysql mariadb-client \
+php7.3-fpm php-mysql -y mariadb-client \
 nginx wget curl
 
 RUN wget -c https://wordpress.org/latest.tar.gz && \
@@ -12,6 +12,8 @@ RUN chmod +x wp-cli.phar
 
 RUN mv wp-cli.phar /usr/local/bin/wp
 
+RUN mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
+
 COPY ./tools/script.sh /
 
 COPY ./tools/www.conf /etc/php/7.3/fpm/pool.d/www.conf
@@ -21,5 +23,6 @@ COPY ./tools/wp-config.php /var/www/html/wordpress
 RUN chmod +x /script.sh
 
 RUN mkdir /run/php/
+
 
 CMD ["/script.sh", "php-fpm7.3", "-R", "-F"]

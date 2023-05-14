@@ -1,8 +1,6 @@
 #!/bin/bash
 service mysql start
-	echo "CREATE DATABASE $MYSQL_DATABASE ;" > db1.sql
-	echo "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' ;" >> db1.sql
-	echo "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%' ;" >> db1.sql
-mysql < db1.sql
-service mysql stop
-mysqld
+mariadb -u root -e "CREATE DATABASE test_db ;"
+mariadb -u root -e "CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD' ; GRANT ALL PRIVILEGES ON *.* TO '$MYSQL_USER'@'%' ; FLUSH PRIVILEGES ;"
+mariadb -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_pass'; FLUSH PRIVILEGES;"
+exec $@
