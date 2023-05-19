@@ -1,4 +1,5 @@
 FROM debian:buster
+
 RUN apt-get update && apt-get install -y php7.3-fpm \
 php7.3-fpm php-mysql -y mariadb-client \
 nginx wget curl
@@ -18,7 +19,6 @@ COPY ./tools/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
 RUN chmod +x /script.sh
 
-RUN mkdir /run/php/
-
+RUN mkdir -p /run/php/
 
 CMD ["/script.sh", "php-fpm7.3", "-R", "-F"]
