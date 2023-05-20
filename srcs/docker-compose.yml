@@ -1,75 +1,67 @@
-version: "3"
+version: "3.3"
 
 services:
-  mariadb:
-    container_name: mariadb
-    build: ./requirements/mariadb/
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-    volumes:
-      -  mariadb:/var/lib/mysql/
-    env_file:
-      - .env
-    networks:
-      - wordpress
-    init : true
-  wordpress:
-    container_name: wordpress
-    build: ./requirements/wordpress
+  nginx:
+    build:
+      context: ./requirements/nginx
+    image: nginx
+    container_name: nginx
     volumes:
       - wordpress:/var/www/html/wordpress
-    env_file:
-      - .env
-    networks:
-      - wordpress
-    depends_on:
-      - mariadb
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
-      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
-      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
-    ports:
-      - 9000:9000
-    restart: always
-    init : true
-  nginx:
-    container_name: nginx
-    depends_on:
-      - wordpress
-    build: ./requirements/nginx/
-    networks:
-      - wordpress
     ports:
       - 443:443
+    depends_on:
+      - wordpress
+    networks:
+      - mynetw
+    restart: always
+  mariadb:
+    build:
+      context: ./requirements/mariadb/
+      args:
+        MYSQL_DB_DATABASE: ${MYSQL_DB_DATABASE}
+        MYSQL_DB_USER: ${MYSQL_DB_USER}
+        MYSQL_DB_USER_PASSWORD: ${MYSQL_DB_USER_PASSWORD}
+        MYSQL_DB_ROOT_PASSWORD: ${MYSQL_DB_ROOT_PASSWORD}
+    image: mariadb
+    container_name: mariadb
     env_file:
       - .env
     volumes:
-      - wordpress:/var/www/html/wordpress
+      - mariadb:/var/lib/mysql
+    networks:
+      - mynetw
     restart: always
-    init : true
-
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+    image: wordpress
+    container_name: wordpress
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    volumes:
+      - wordpress:/var/www/html/wordpress
+    networks:
+      - mynetw
+    restart: always
 networks:
-  wordpress:
+  mynetw:
     driver: bridge
-
-volumes :
-  wordpress:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/atarchou/data/wordpress
-      o: bind
+    name: mynetw
+volumes:
   mariadb:
     driver: local
+    name: mariadb
     driver_opts:
       type: none
-      device: /home/atarchou/data/mariadb
       o: bind
+      device: /home/achahdan/data/mariadb
+  wordpress:
+    driver: local
+    name: wordpress
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/achahdan/data/wordpress
