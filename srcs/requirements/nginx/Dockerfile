@@ -6,7 +6,7 @@ COPY ./tools/certificate.crt /etc/ssl/
 
 COPY ./tools/private.key /etc/ssl/
 
-COPY ./tools/default.conf /etc/nginx/conf.d/
+COPY ./tools/default.conf /etc/nginx/sites-available/default
 
 EXPOSE 443
 

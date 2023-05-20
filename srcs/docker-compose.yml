@@ -19,10 +19,10 @@ services:
     build:
       context: ./requirements/mariadb/
       args:
-        MYSQL_DB_DATABASE: ${MYSQL_DB_DATABASE}
-        MYSQL_DB_USER: ${MYSQL_DB_USER}
-        MYSQL_DB_USER_PASSWORD: ${MYSQL_DB_USER_PASSWORD}
-        MYSQL_DB_ROOT_PASSWORD: ${MYSQL_DB_ROOT_PASSWORD}
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
+        MYSQL_USER: ${MYSQL_USER}
+        MYSQL_USER_PASSWORD: ${MYSQL_USER_PASSWORD}
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     image: mariadb
     container_name: mariadb
     env_file:
@@ -57,11 +57,11 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/achahdan/data/mariadb
+      device: /home/atarchou/data/mariadb
   wordpress:
     driver: local
     name: wordpress
     driver_opts:
       type: none
       o: bind
-      device: /home/achahdan/data/wordpress
+      device: /home/atarchou/data/wordpress
