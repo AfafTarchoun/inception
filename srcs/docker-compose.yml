@@ -21,7 +21,8 @@ services:
       args:
         MYSQL_DATABASE: ${MYSQL_DATABASE}
         MYSQL_USER: ${MYSQL_USER}
-        MYSQL_USER_PASSWORD: ${MYSQL_USER_PASSWORD}
+        MYSQL_DBHOST: ${MYSQL_DBHOST}
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     image: mariadb
     container_name: mariadb
