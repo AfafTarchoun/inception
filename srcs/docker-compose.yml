@@ -31,7 +31,6 @@ services:
       - mariadb:/var/lib/mysql
     networks:
       - inception
-    hostname: mariadb
     restart: always
   wordpress:
     build:
