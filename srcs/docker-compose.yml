@@ -13,15 +13,14 @@ services:
     depends_on:
       - wordpress
     networks:
-      - mynetw
+      - inception
     restart: always
   mariadb:
     build:
       context: ./requirements/mariadb/
       args:
-        MYSQL_DATABASE: ${MYSQL_DATABASE}
         MYSQL_USER: ${MYSQL_USER}
-        MYSQL_DBHOST: ${MYSQL_DBHOST}
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
         MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     image: mariadb
@@ -31,7 +30,8 @@ services:
     volumes:
       - mariadb:/var/lib/mysql
     networks:
-      - mynetw
+      - inception
+    hostname: mariadb
     restart: always
   wordpress:
     build:
@@ -45,12 +45,12 @@ services:
     volumes:
       - wordpress:/var/www/html/wordpress
     networks:
-      - mynetw
+      - inception
     restart: always
 networks:
-  mynetw:
+  inception:
     driver: bridge
-    name: mynetw
+    name: inception
 volumes:
   mariadb:
     driver: local

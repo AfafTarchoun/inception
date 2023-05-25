@@ -1,6 +1,8 @@
 FROM debian:buster
 
-RUN apt-get -y update && apt-get install -y nginx && apt-get install openssl -y
+RUN apt-get update
+
+RUN apt-get install -y nginx && apt-get install -y openssl
 
 COPY ./tools/certificate.crt /etc/ssl/
 

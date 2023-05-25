@@ -26,7 +26,7 @@ define( 'DB_NAME', '${MYSQL_DATABASE}' );
 define( 'DB_USER', '${MYSQL_USER}' );
 
 /** Database password */
-define( 'DB_PASSWORD', '${MYSQL_PASSWORD}' );
+define( 'DB_PASSWORD', '${MYSQL_PASSWORD' );
 
 /** Database hostname */
 define( 'DB_HOST', 'mariadb' );
@@ -94,3 +94,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
+define('WP_ALLOW_REPAIR', true);
