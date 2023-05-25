@@ -17,7 +17,7 @@ EXPOSE 9000
 
 COPY /tools/www.conf /etc/php/7/fpm/pool.d/www.conf
 
-COPY /tools/wp-sample-config.php /var/www/html/wordpress/wp-config.php
+#COPY /tools/wp-sample-config.php /var/www/html/wordpress/wp-config.php
 
 COPY /tools/script.sh /var/www/html/wordpress
 
