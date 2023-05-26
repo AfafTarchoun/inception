@@ -6,11 +6,11 @@ RUN apt-get upgrade -y
 
 RUN apt-get install -y nginx openssl
 
-COPY ./tools/certificate.crt /etc/ssl/
+RUN openssl req -x509 -newkey rsa:2048 -sha256 -days 256 -nodes -subj \
+    /C=MA/L=BG/O=1337 -keyout /etc/ssl/atarchou.42.fr.key \
+    -out /etc/ssl/atarchou.42.fr.crt;
 
-COPY ./tools/private.key /etc/ssl/
-
-COPY ./tools/default.conf /etc/nginx/conf.d/default.conf
+COPY /tools/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 443
 
