@@ -22,4 +22,4 @@ RUN sh ./script.sh
 
 EXPOSE 3306
 
-CMD ["mysqld", "--skip_networking=false"]
+CMD ["mysqld", "--bind-address=0.0.0.0"]

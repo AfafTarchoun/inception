@@ -123,10 +123,10 @@ collation-server      = utf8mb4_general_ci
 # you can put MariaDB-only options here
 [mariadb]
 
-port            = 3306
-socket          = /run/mysqld/mysqld.sock
-
 # This group is only read by MariaDB-10.0 servers.
 # If you use the same .cnf file for MariaDB of different versions,
 # use this group for options that older servers don't understand
 [mariadb-10.0]
+[client]
+port            = 3306
+socket          = /run/mysqld/mysqld.sock
