@@ -14,7 +14,7 @@ RUN chown -R mysql:mysql /var/run/mysql
 
 COPY ./tools/script.sh ./script.sh
 
-COPY ./tools/50-server.cnf ./etc/mysql/mariadb.conf.d/50-server.cnf
+COPY ./conf/50-server.cnf ./etc/mysql/mariadb.conf.d/50-server.cnf
 
 RUN chmod +x /script.sh
 

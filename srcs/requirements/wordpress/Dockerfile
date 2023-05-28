@@ -19,6 +19,6 @@ EXPOSE 9000
 
 COPY /tools/script.sh /var/www/html/wordpress
 
-COPY /tools/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+COPY /conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
 CMD ["sh" , "/var/www/html/wordpress/script.sh"]
